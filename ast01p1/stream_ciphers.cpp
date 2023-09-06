@@ -29,11 +29,11 @@ struct scheme_parameters {
 };
 
 /**
- * @brief 
+ * @brief Takes chars in a string and adds offset for encryption.
  *
- * @param 
- * @param 
- * @return 
+ * @param message - message to be encrypted
+ * @param offset - character offset for all chars in message
+ * @return tempMessage - final message with offset added
  * 
  * @details
  * If you write this function correctly, it should
@@ -41,6 +41,11 @@ struct scheme_parameters {
  */
 string offset(string message, int offset) {
   // Your Code Here
+  string tempMessage;
+  for (int i = 0; i < message.length(); i++){
+    tempMessage += (message[i] + offset) % 128;
+  }
+  return(tempMessage);
 }
 
 /**
@@ -48,27 +53,37 @@ string offset(string message, int offset) {
  */
 void offset_encryption() {
   int s = 5;
-  string message =
+  /* string message =
       "\nThis is a test of the offset protocol\n\tHow does your protocol "
       "handle the newline and offset in?\nTechnically, this is a very dangerous"
-      " practice and should be avoided.";
-
+      " practice and should be avoided."; */
   // Your Code Here
-
+  string message = "The orange cat, sleeping soundly, awoke.";
+  cout << "Text: " << message << endl;
+  message = offset(message, 5);
+  cout << "Cipher: " << message << endl;
+  message = offset(message, -5);
+  cout << "DeCipher: " << message << endl;
 }
 
 /**
- * @brief 
+ * @brief Opens filestream. Returns error if failed.
  *
- * @param  
+ * @param str - file to be opened, filename
  * @return ifstream
  */
-ifstream _open_input_file(string) {
+ifstream _open_input_file(string str) {
   // Your Code Here
+  ifstream fileReader;
+  fileReader.open(str);
+  if(fileReader.is_open() != true){
+    cout << "ERROR: Could not open file : " << str << endl;
+  }
+  return(fileReader);
 }
 
 /**
- * @brief 
+ * @brief Opens file to read from. Returns error if failed.
  *
  * @param argc main function formal parameter
  * @param argv main function formal parameter
@@ -76,33 +91,57 @@ ifstream _open_input_file(string) {
  */
 ifstream open_argv_file(int argc, const char** argv) {
   // Your Code Here
+  ifstream fileReader;
+  if(argc > 2 || argc < 2){
+    cout << "ERROR: Incorrect usage!" << endl
+      << "./a.out <filename>" << endl;
+  }
+  if(argc = 2){
+    fileReader = _open_input_file(argv[1]);
+  }
+  return(fileReader);
 }
 
 /**
- * @brief 
+ * @brief Prompts for file to open and read from.
  * 
  * @return ifstream
  */
 ifstream open_input_file() {
   // Your Code Here
+  ifstream fileReader;
+  string fileName;
+  cout << "Please enter the name of your input file: ";
+  cin >> fileName;
+  fileReader = _open_input_file(fileName);
+  return(fileReader);
 }
 
 /**
- * @brief 
+ * @brief Opens file to write to.
  *
- * @param 
+ * @param fileName - file name
  * @return ifstream
  */
-ofstream _open_output_file(string file_name) {
+ofstream _open_output_file(string fileName) {
   // Your Code Here
+  ofstream fileWriter;
+  fileWriter.open(fileName);
+  return(fileWriter);
 }
 
 /**
- * @brief 
+ * @brief Prompts for file to open and write to.
  * 
  * @return ofstream
  */
 ofstream open_output_file() {
+  ofstream fileWriter;
+  string fileName;
+  cout << "Please enter the name of your output file: ";
+  cin >> fileName;
+  fileWriter = _open_output_file(fileName);
+  return(fileWriter);
 }
 
 /**
@@ -115,13 +154,20 @@ ofstream open_output_file() {
  * @param input ifstream input file id
  */
 void sequential_file_encryption(ofstream output, ifstream input) {
-  int offset_value;
-  string input_stream;
+  int offsetValue;
+  string inputStream;
 
   cout << "What is your shift key? ";
-  cin >> offset_value;
+  cin >> offsetValue;
+  cout << offsetValue << endl;
 
   // Your Code Here
+  while(input.eof() == false){
+    getline(input, inputStream);
+    cout << inputStream << endl;
+    inputStream = offset(inputStream, offsetValue);
+    output << inputStream << endl;
+  }
 }
 
 /**
@@ -141,8 +187,11 @@ void sequential_file_encryption(ofstream output, ifstream input) {
  * 
  *  Engaging in any subset of these restrictions will result in 0 points
  */
-string rotate(string, int) {
+string rotate(string message, int offset) {
   // Your Code Here
+  if(offset % message.length() = 0){
+    return(message);
+  }
 }
 
 /**
@@ -179,9 +228,9 @@ void rotation_file_encryption() {
 }
 
 int main(int argc, char const** argv) {
-  offset_encryption();
+  // offset_encryption();
 
-  // sequential_file_encryption(open_output_file(), open_argv_file(argc, argv));
+  sequential_file_encryption(open_output_file(), open_argv_file(argc, argv));
 
   // rotation_file_encryption();
 
