@@ -43,7 +43,7 @@ string offset(string message, int offset) {
   // Your Code Here
   string tempMessage;
   for (int i = 0; i < message.length(); i++){
-    tempMessage += (message[i] + offset) % 128;
+    tempMessage += (message[i] + offset);
   }
   return(tempMessage);
 }
@@ -53,17 +53,19 @@ string offset(string message, int offset) {
  */
 void offset_encryption() {
   int s = 5;
-  /* string message =
-      "\nThis is a test of the offset protocol\n\tHow does your protocol "
-      "handle the newline and offset in?\nTechnically, this is a very dangerous"
-      " practice and should be avoided."; */
+  /*string message =
+      "\nThis is a test of the offset protocol"
+      "\n\tHow does your protocol "
+      "handle the newline and offset in?"
+      "\nTechnically, this is a very dangerous"
+      " practice and should be avoided.";*/
   // Your Code Here
-  string message = "The orange cat, sleeping soundly, awoke.";
-  cout << "Text: " << message << endl;
-  message = offset(message, 5);
-  cout << "Cipher: " << message << endl;
-  message = offset(message, -5);
-  cout << "DeCipher: " << message << endl;
+  string message = "The orange cat, sleeping quietly, awoke.";
+  cout << "Text : " << message << endl << endl;
+  message = offset(message, s);
+  cout << "Cipher: " << message << endl << endl;
+  message = offset(message, -s);
+  cout << "DeCipher: " << message << endl << endl;
 }
 
 /**
@@ -76,8 +78,9 @@ ifstream _open_input_file(string str) {
   // Your Code Here
   ifstream fileReader;
   fileReader.open(str);
-  if(fileReader.is_open() != true){
-    cout << "ERROR: Could not open file : " << str << endl;
+  if(fileReader.fail()){
+    cout << endl << "ERROR: Could not open file : " << str << endl;
+    exit(-1);
   }
   return(fileReader);
 }
@@ -93,10 +96,11 @@ ifstream open_argv_file(int argc, const char** argv) {
   // Your Code Here
   ifstream fileReader;
   if(argc > 2 || argc < 2){
-    cout << "ERROR: Incorrect usage!" << endl
+    cout << endl << "ERROR: Incorrect usage!" << endl
       << "./a.out <filename>" << endl;
+    exit(-1);
   }
-  if(argc = 2){
+  if(argc == 2){
     fileReader = _open_input_file(argv[1]);
   }
   return(fileReader);
@@ -111,7 +115,7 @@ ifstream open_input_file() {
   // Your Code Here
   ifstream fileReader;
   string fileName;
-  cout << "Please enter the name of your input file: ";
+  cout << "Please enter the name of your input file: " << endl;
   cin >> fileName;
   fileReader = _open_input_file(fileName);
   return(fileReader);
@@ -138,7 +142,7 @@ ofstream _open_output_file(string fileName) {
 ofstream open_output_file() {
   ofstream fileWriter;
   string fileName;
-  cout << "Please enter the name of your output file: ";
+  cout << "Please enter the name of your output file: " << endl;
   cin >> fileName;
   fileWriter = _open_output_file(fileName);
   return(fileWriter);
@@ -159,12 +163,10 @@ void sequential_file_encryption(ofstream output, ifstream input) {
 
   cout << "What is your shift key? ";
   cin >> offsetValue;
-  cout << offsetValue << endl;
 
   // Your Code Here
   while(input.eof() == false){
     getline(input, inputStream);
-    cout << inputStream << endl;
     inputStream = offset(inputStream, offsetValue);
     output << inputStream << endl;
   }
@@ -189,9 +191,26 @@ void sequential_file_encryption(ofstream output, ifstream input) {
  */
 string rotate(string message, int offset) {
   // Your Code Here
-  if(offset % message.length() = 0){
+  int swap;
+  int strLength = message.length();
+  string tempMessage;
+  if(offset % strLength == 0){
     return(message);
   }
+  if(offset <= 0){
+    swap = offset * -1;
+  }
+  if(offset > 0){
+    swap = strLength - offset;
+  }
+  for(int i = 0; i < strLength; i++){
+    if(swap > strLength - 1){
+      swap = 0;
+    }
+    tempMessage += message[swap];
+    swap++;
+  }
+  return(tempMessage);
 }
 
 /**
@@ -207,9 +226,15 @@ string rotation_encryption(string message) {
   cin >> scheme;
 
   if (scheme == 'E' || scheme == 'e') {
-    // Your Code here
+    for(int i = 0; i < es.stages; i++){
+      message = rotate(message, es.rotate[i]);
+      message = offset(message, es.offset[i]);
+    }
   } else if (scheme == 'D' || scheme == 'd') {
-    // Your Code Here
+    for(int i = 0; i < es.stages; i++){
+      message = offset(message, es.rotate[-i]);
+      message = rotate(message, es.offset[-i]);
+    }
   } else {
     cerr << "ERROR: Encryption scheme unrecognized!" << endl;
   }
@@ -228,11 +253,12 @@ void rotation_file_encryption() {
 }
 
 int main(int argc, char const** argv) {
-  // offset_encryption();
+  offset_encryption();
 
-  sequential_file_encryption(open_output_file(), open_argv_file(argc, argv));
+  sequential_file_encryption
+    (open_output_file(), open_argv_file(argc, argv));
 
-  // rotation_file_encryption();
+  rotation_file_encryption();
 
   return 0;
 }
