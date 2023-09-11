@@ -1,9 +1,16 @@
+/*
+* Name: Jimmy Soto Agustin, 5008099390, 1001, Assignment 1 Part 2
+* Description: Encrypts/decrypts a message using RSA encryption.
+* Input: File name to use, block size, 2 prime nums, and public key.
+* Output: Message after rotation/offset encryption and decryption.
+*/ 
+
 /**
- * @file 
- * @author 
- * @brief 
+ * @file rsa_crypto.cpp
+ * @author Jimmy Soto Agustin
+ * @brief Encrypts/decrypts a message using RSA encryption.
  * 
- * @date 
+ * @date Start: 9/8/2023 - End: 9/10/2023
  */
 
 #include <iostream>
@@ -55,7 +62,7 @@ ifstream open_input_file() {
   // Your Code Here
   ifstream fileReader;
   string fileName;
-  cout << "Please enter the name of your input file: " << endl;
+  cout << "Please enter the name of your input file: ";
   cin >> fileName;
   fileReader = _open_input_file(fileName);
   return(fileReader);
@@ -82,32 +89,35 @@ ofstream _open_output_file(string fileName) {
 ofstream open_output_file() {
   ofstream fileWriter;
   string fileName;
-  cout << "Please enter the name of your output file: " << endl;
+  cout << "Please enter the name of your output file: ";
   cin >> fileName;
   fileWriter = _open_output_file(fileName);
   return(fileWriter);
 }
 
 /**
- * @brief
+ * @brief Checks to see if a long num p is prime.
  *
- * @param
+ * @param p - num to be checked
  * @return true
  * @return false
  *
  */
 bool prime_test(long p) {
   // Cover simple base cases
-  if (p == 2 || p == 3) return true;
-  if (p <= 1 || p % 2 == 0 || p % 3 == 0) return false;
-
+  if (p == 2 || p == 3){
+    return(true);
+  }
+  if (p <= 1 || p % 2 == 0 || p % 3 == 0){
+    return(false);
+  }
   // Your Code Here
-  for(int i = 3; i < p/2; i++){
+  for(int i = 3; i <= sqrt(p); i++){
     if(p % i == 0){
       return(false);
     }
-    return(true);
   }
+  return(true);
 }
 
 /**
@@ -130,9 +140,9 @@ int gcd(int num, int den) {
 }
 
 /**
- * @brief
+ * @brief Prompts user for block size.
  *
- * @param
+ * @param blkSize - input from user for block size
  *
  */
 void prompt_user_block(int& blkSize) {
@@ -141,20 +151,21 @@ void prompt_user_block(int& blkSize) {
     cout << "Enter plaintext block size: ";
     cin >> blkSize;
     if(blkSize <= 1){
-      cout << "ERROR: block size must be greater than 1!" << endl;
+      cout << endl <<
+        "ERROR: block size must be greater than 1!" << endl;
     }
   }while(blkSize <= 1);
 }
 
 /**
- * @brief
+ * @brief Prompts user for prime num and checks if prime.
  *
- * @param
+ * @param p - num to be checked
  *
  */
 void _prompt_user_prime(int& p) {
   // Your Code Here
-  bool primeNum;
+  bool primeNum = false;
   do{
     cout << "Enter sufficiently large prime number: ";
     cin >> p;
@@ -166,20 +177,18 @@ void _prompt_user_prime(int& p) {
 }
 
 /**
- * @brief
+ * @brief Prompts user for two prime nums and runs checks.
  *
- * @param
- * @param
- * @param
+ * @param p - 1st num provided and checked
+ * @param q - 2nd num provided and checked
+ * @param b - block size provided earlier
  *
  * Hint: Use the pow function from the math library here
  */
 void prompt_user_prime(int& p, int& q, int b) {
   for (;;) {
-    cout << "Enter sufficiently large prime number: ";
-    cin >> p;
-    cout << "Enter sufficiently large prime number: ";
-    cin >> q;
+    _prompt_user_prime(p);
+    _prompt_user_prime(q);
     if (p == q) {
       cout << "ERROR: p cannot equal q!" << endl;
       continue;
@@ -194,23 +203,23 @@ void prompt_user_prime(int& p, int& q, int b) {
 }
 
 /**
- * @brief
+ * @brief Prompts user for relative prime, or public key
  *
- * @param
- * @param
+ * @param e - relative prime and public key
+ * @param phi_n - 1st and 2nd prime - 1 multiplied by each other
  */
 void prompt_user_relative_prime(long& e, long phi_n) {
   // Your Code Here
   bool primeTest = false;
   do{
-    cout << "Enter value that is relative prime to " << phi_n;
+    cout << "Enter value that is relative prime to " << phi_n << ": ";
     cin >> e;
     if(e > phi_n){
       cout << "ERROR: value must be less than " << phi_n << endl;
     } else if(e < 2){
       cout << "ERROR: value must be greater than 2" << endl;
     } else if(gcd(e, phi_n) != 1){
-      cout << "ERROR: " << e << " is not relative prime to "
+      cout << "ERROR: " << e << " is not relatively prime to "
         << phi_n << "!" << endl;
     } else{
       primeTest = true;
@@ -219,14 +228,16 @@ void prompt_user_relative_prime(long& e, long phi_n) {
 }
 
 /**
- * @brief Function to generate all values that are relatively prime to the Euler
+ * @brief Function to generate all values that are
+ * relatively prime to the Euler
  * totient phi(n)
  *
- * @param phi_n Euler totient phi(n) calculated from the prime values p and q
+ * @param phi_n Euler totient phi(n) calculated from
+ * the prime values p and q
  *
  */
 void generate_relative_primes(long phi_n) {
-  cout << "\nGenerating all values relatively prime to " << phi_n << endl;
+  cout << "\nGenerating all values relatively prime to " << phi_n;
 
   int SI = 1;
   int versa = phi_n;
@@ -274,8 +285,10 @@ long generate_private_key(long a, long n) {
 // Place the file handler functions here
 
 /**
- * @brief Function to apply a key to either a piece of cipher text or plain text
- * Thus is the beauty of encryption that the methods of encryption and
+ * @brief Function to apply a key to either a
+ * piece of cipher text or plain text
+ * Thus is the beauty of encryption that
+ * the methods of encryption and
  * decryption are identical but with differnt parameters
  *
  * @param key Public or Private Key
@@ -312,7 +325,7 @@ long apply_key(long key, long n, long text) {
  */
 void encrypt_message(long key, long n, int block) {
   int power; // Used to raise a base power
-  long cipher; // Used to store the series compound
+  long cipher = 0; // Used to store the series compound
   string message;
 
   ifstream input = open_input_file();
@@ -322,13 +335,17 @@ void encrypt_message(long key, long n, int block) {
   ofstream output = open_output_file();
 
   for (int i = 0; i < 5; i++) {
-    char strBlock[block];
+    int strBlock[block];
+    string tmpMsg;
+    cipher = 0;
+    for(int i = block - 1; i >= 0; i--){
+      tmpMsg.push_back(message[i]);
+    }
     for(int i = 0; i < block; i++){
-      power += (strBlock[i] * pow(27, i));
+      strBlock[i] = (tmpMsg[i] - 1) % 64;
+      cipher += (pow(27, i) * strBlock[i]);
     }
     message = message.substr(block, message.length() - 1);
-    cipher = pow(power, key);
-    cipher = cipher % n;
     output << apply_key(key, n, cipher) << endl;
   }
   output.close();
@@ -338,8 +355,10 @@ void encrypt_message(long key, long n, int block) {
  * @brief This function serves to both decrypt, decode, and then display
  * the original encrypted data
  *
- * The encrypted data was generated by the encrypt_message function and was
- * stored in a file. Each row of the file represents an encrypted block of data
+ * The encrypted data was generated by
+ * the encrypt_message function and was
+ * stored in a file. Each row of the file
+ * represents an encrypted block of data
  *
  * @param key Private Key (d)
  * @param n Prime Product (p * q)
@@ -371,8 +390,8 @@ void decrypt_message(long key, long n, int block) {
 }
 
 /**
- * @brief Serves to demonstrate the efficacy of all the functions implemented
- * above
+ * @brief Serves to demonstrate the efficacy
+ * of all the functions implemented above
  *
  * @param argc Count of command line parameters
  * @param argv Array of command line paramters
@@ -392,7 +411,7 @@ int main(int argc, char const* argv[]) {
   // REMEMBER: THIS WAS UNCOMMENTED!
   // YOU MAY NEED TO COMMENT THIS OUT
   // AGAIN UPON SUBMISSION!
-  generate_relative_primes(phi_n);
+  // generate_relative_primes(phi_n);
 
   prompt_user_relative_prime(e, phi_n);
 

@@ -1,10 +1,17 @@
+/*
+* Name: Jimmy Soto Agustin, 5008099390, 1001, Assignment 1 Part 1
+* Description: Encrypts/decrypts a message, either from a string or file.
+* Input: File name or string to encrypt/decrypt.
+* Output: Message after rotation/offset encryption/decryption.
+*/ 
+
 /**
- * @file 
- * @author 
+ * @file stream_ciphers.cpp
+ * @author Jimmy Soto Agustin
  *
- * @brief 
+ * @brief Encrypts/decrypts a message, either from a string or file. 
  *
- * @date
+ * @date Start: 9/4/2023 - End: 9/10/2023
  */
 
 #include <iostream>
@@ -41,9 +48,9 @@ struct scheme_parameters {
  */
 string offset(string message, int offset) {
   // Your Code Here
-  string tempMessage;
-  for (int i = 0; i < message.length(); i++){
-    tempMessage += (message[i] + offset);
+  string tempMessage = message;
+  for (int i = 0; i < tempMessage.length(); i++){
+    tempMessage[i] = (message[i] + offset) % 128;
   }
   return(tempMessage);
 }
@@ -173,11 +180,11 @@ void sequential_file_encryption(ofstream output, ifstream input) {
 }
 
 /**
- * @brief 
+ * @brief Rotates through characters in a string. 
  *
- * @param 
- * @param 
- * @return string
+ * @param message - message to rotate
+ * @param offset - how many characters to rotate and what way
+ * @return string tempMessage
  *
  * @details
  * 
@@ -214,7 +221,7 @@ string rotate(string message, int offset) {
 }
 
 /**
- * @brief 
+ * @brief Encrypts/decrypts message through rotation/offset.
  * 
  * @return string
  */
@@ -232,8 +239,11 @@ string rotation_encryption(string message) {
     }
   } else if (scheme == 'D' || scheme == 'd') {
     for(int i = 0; i < es.stages; i++){
-      message = offset(message, es.rotate[-i]);
-      message = rotate(message, es.offset[-i]);
+      // NOTE: DO NOT USE THE '-' INSIDE []!
+      // YOU ARE NEGATING THE COUNTER AND
+      // GOING OUT OF BOUNDS!
+      message = offset(message, -es.offset[i]);
+      message = rotate(message, -es.rotate[i]);
     }
   } else {
     cerr << "ERROR: Encryption scheme unrecognized!" << endl;
