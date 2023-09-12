@@ -1,0 +1,45 @@
+// Base class 1
+class Student{
+	string name;
+	int score;
+	char grade;
+    public:
+	f1();
+	f2();
+	...
+}
+
+// Derived class 1
+class StudentType::public Student{
+	f4();
+// Example of operation overriding
+// With function overriding, you can
+// call a function inherited from
+// another class if they share the
+// same name.
+	f1(){
+		Student.f1();
+		...
+	}
+}
+
+int main(){
+	StudentType stdObj;
+	stdObj.f1();
+}
+
+// Base class 2
+class StudentDetails{
+    private:
+	int age;
+	Student stdObj;
+    public:
+	StudentDetails();
+	StudentDetails(int);
+}
+
+int main(){
+	StudentDetails studentOne;
+	studentOne.f1(); // Invalid!
+	stdObj.f1(); // Valid!
+}

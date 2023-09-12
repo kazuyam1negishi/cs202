@@ -38,6 +38,8 @@ class Student{
 };
 
 int main(){
+    ifstream fileReader;
+
 	Student stdOne;
 	stdOne.setData();
 	stdOne.calculateGrade();
@@ -98,11 +100,13 @@ void Student::getDataFromFile(ifstream fileReader){
     string crtLine;
     getline(fileReader, crtLine);
     int count;
-
     while(fileReader >> name >> score){
-        Student temp(name, score);
-        
+        Student(name, score);
+        calculateGrade();
+        printData();
+        count++;
     }
+    cout << "Total entries: " << count << endl;
 }
 
 // Default destructor
