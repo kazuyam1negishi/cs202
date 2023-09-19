@@ -1,0 +1,204 @@
+
+Multiplicand in decimal: 2
+Multiplicand in binary: 00010
+
+Multiplier in decimal: 6
+multiplier in binary: 00110
+step	qn	q[n+1]		action				multiplicand	Product
+				initial			0010		0000 0110
+1	0	0		a:00->no operation;shiftRight	0010		0000 0011	
+2	1	0		a:10->prod=ls/prod-Mcand	0010		1110 0011
+				b:shift right product		0010		1111 0001	
+3	1	1		a:11->no operation;shiftRight	0010		1111 1000	
+4	0	1		a:01->prod=ls/prod+Mcand	0010		0001 1000
+				b:shift right product		0010		0000 1100	
+Result=0000 1100
+Result in decimal=12
+-------------------------------------------------------------------------------------------------------------------
+
+
+Multiplicand in decimal: -6
+Multiplicand in binary: 1010
+
+Multiplier in decimal: -6
+multiplier in binary: 1010
+step	qn	q[n+1]		action				multiplicand	Product
+				initial			1010		0000 1010
+1	0	0		a:00->no operation;shiftRight	1010		0000 0101	
+2	1	0		a:10->prod=ls/prod-Mcand	1010		0110 0101
+				b:shift right product		1010		0011 0010	
+3	0	1		a:01->prod=ls/prod+Mcand	1010		1101 0010
+				b:shift right product		1010		1110 1001	
+4	1	0		a:10->prod=ls/prod-Mcand	1010		0100 1001
+				b:shift right product		1010		0010 0100	
+Result=0010 0100
+Result in decimal=36
+-------------------------------------------------------------------------------------------------------------------
+
+
+Multiplicand in decimal: -4
+Multiplicand in binary: 1100
+
+Multiplier in decimal: 7
+multiplier in binary: 00111
+step	qn	q[n+1]		action				multiplicand	Product
+				initial			1100		0000 0111
+1	1	0		a:10->prod=ls/prod-Mcand	1100		0100 0111
+				b:shift right product		1100		0010 0011	
+2	1	1		a:11->no operation;shiftRight	1100		0001 0001	
+3	1	1		a:11->no operation;shiftRight	1100		0000 1000	
+4	0	1		a:01->prod=ls/prod+Mcand	1100		1100 1000
+				b:shift right product		1100		1110 0100	
+Result=1110 0100
+Result in decimal=-28
+-------------------------------------------------------------------------------------------------------------------
+
+
+Multiplicand in decimal: 0
+Multiplicand in binary: 00000
+
+Multiplier in decimal: -8
+multiplier in binary: 1000
+step	qn	q[n+1]		action				multiplicand	Product
+				initial			0000		0000 1000
+1	0	0		a:00->no operation;shiftRight	0000		0000 0100	
+2	0	0		a:00->no operation;shiftRight	0000		0000 0010	
+3	0	0		a:00->no operation;shiftRight	0000		0000 0001	
+4	1	0		a:10->prod=ls/prod-Mcand	0000		0000 0001
+				b:shift right product		0000		0000 0000	
+Result=0000 0000
+Result in decimal=0
+-------------------------------------------------------------------------------------------------------------------
+
+
+Multiplicand in decimal: 6
+Multiplicand in binary: 00110
+
+Multiplier in decimal: 0
+multiplier in binary: 00000
+step	qn	q[n+1]		action				multiplicand	Product
+				initial			0110		0000 0000
+1	0	0		a:00->no operation;shiftRight	0110		0000 0000	
+2	0	0		a:00->no operation;shiftRight	0110		0000 0000	
+3	0	0		a:00->no operation;shiftRight	0110		0000 0000	
+4	0	0		a:00->no operation;shiftRight	0110		0000 0000	
+Result=0000 0000
+Result in decimal=0
+-------------------------------------------------------------------------------------------------------------------
+
+
+Multiplicand in decimal: -11
+Multiplicand in binary: 11110101
+
+Multiplier in decimal: 5
+multiplier in binary: 000000101
+step	qn	q[n+1]		action				multiplicand		Product
+				initial			11110101		00000000 00000101
+1	1	0		a:10->prod=ls/prod-Mcand	11110101		00001011 00000101
+				b:shift right product		11110101		00000101 10000010	
+2	0	1		a:01->prod=ls/prod+Mcand	11110101		11111010 10000010
+				b:shift right product		11110101		11111101 01000001	
+3	1	0		a:10->prod=ls/prod-Mcand	11110101		00001000 01000001
+				b:shift right product		11110101		00000100 00100000	
+4	0	1		a:01->prod=ls/prod+Mcand	11110101		11111001 00100000
+				b:shift right product		11110101		11111100 10010000	
+5	0	0		a:00->no operation;shiftRight	11110101		11111110 01001000	
+6	0	0		a:00->no operation;shiftRight	11110101		11111111 00100100	
+7	0	0		a:00->no operation;shiftRight	11110101		11111111 10010010	
+8	0	0		a:00->no operation;shiftRight	11110101		11111111 11001001	
+Result=11111111 11001001
+Result in decimal=-55
+-------------------------------------------------------------------------------------------------------------------
+
+
+Multiplicand in decimal: 18
+Multiplicand in binary: 000010010
+
+Multiplier in decimal: -7
+multiplier in binary: 11111001
+step	qn	q[n+1]		action				multiplicand		Product
+				initial			00010010		00000000 11111001
+1	1	0		a:10->prod=ls/prod-Mcand	00010010		11101110 11111001
+				b:shift right product		00010010		11110111 01111100	
+2	0	1		a:01->prod=ls/prod+Mcand	00010010		00001001 01111100
+				b:shift right product		00010010		00000100 10111110	
+3	0	0		a:00->no operation;shiftRight	00010010		00000010 01011111	
+4	1	0		a:10->prod=ls/prod-Mcand	00010010		11110000 01011111
+				b:shift right product		00010010		11111000 00101111	
+5	1	1		a:11->no operation;shiftRight	00010010		11111100 00010111	
+6	1	1		a:11->no operation;shiftRight	00010010		11111110 00001011	
+7	1	1		a:11->no operation;shiftRight	00010010		11111111 00000101	
+8	1	1		a:11->no operation;shiftRight	00010010		11111111 10000010	
+Result=11111111 10000010
+Result in decimal=-126
+-------------------------------------------------------------------------------------------------------------------
+
+
+Multiplicand in decimal: 8
+Multiplicand in binary: 000001000
+
+Multiplier in decimal: 16
+multiplier in binary: 000010000
+step	qn	q[n+1]		action				multiplicand		Product
+				initial			00001000		00000000 00010000
+1	0	0		a:00->no operation;shiftRight	00001000		00000000 00001000	
+2	0	0		a:00->no operation;shiftRight	00001000		00000000 00000100	
+3	0	0		a:00->no operation;shiftRight	00001000		00000000 00000010	
+4	0	0		a:00->no operation;shiftRight	00001000		00000000 00000001	
+5	1	0		a:10->prod=ls/prod-Mcand	00001000		11111000 00000001
+				b:shift right product		00001000		11111100 00000000	
+6	0	1		a:01->prod=ls/prod+Mcand	00001000		00000100 00000000
+				b:shift right product		00001000		00000010 00000000	
+7	0	0		a:00->no operation;shiftRight	00001000		00000001 00000000	
+8	0	0		a:00->no operation;shiftRight	00001000		00000000 10000000	
+Result=00000000 10000000
+Result in decimal=128
+-------------------------------------------------------------------------------------------------------------------
+
+
+Multiplicand in decimal: 17
+Multiplicand in binary: 000010001
+
+Multiplier in decimal: 18
+multiplier in binary: 000010010
+step	qn	q[n+1]		action				multiplicand		Product
+				initial			00010001		00000000 00010010
+1	0	0		a:00->no operation;shiftRight	00010001		00000000 00001001	
+2	1	0		a:10->prod=ls/prod-Mcand	00010001		11101111 00001001
+				b:shift right product		00010001		11110111 10000100	
+3	0	1		a:01->prod=ls/prod+Mcand	00010001		00001000 10000100
+				b:shift right product		00010001		00000100 01000010	
+4	0	0		a:00->no operation;shiftRight	00010001		00000010 00100001	
+5	1	0		a:10->prod=ls/prod-Mcand	00010001		11110001 00100001
+				b:shift right product		00010001		11111000 10010000	
+6	0	1		a:01->prod=ls/prod+Mcand	00010001		00001001 10010000
+				b:shift right product		00010001		00000100 11001000	
+7	0	0		a:00->no operation;shiftRight	00010001		00000010 01100100	
+8	0	0		a:00->no operation;shiftRight	00010001		00000001 00110010	
+Result=00000001 00110010
+Result in decimal=306
+-------------------------------------------------------------------------------------------------------------------
+
+
+Multiplicand in decimal: 9
+Multiplicand in binary: 000001001
+
+Multiplier in decimal: -9
+multiplier in binary: 11110111
+step	qn	q[n+1]		action				multiplicand		Product
+				initial			00001001		00000000 11110111
+1	1	0		a:10->prod=ls/prod-Mcand	00001001		11110111 11110111
+				b:shift right product		00001001		11111011 11111011	
+2	1	1		a:11->no operation;shiftRight	00001001		11111101 11111101	
+3	1	1		a:11->no operation;shiftRight	00001001		11111110 11111110	
+4	0	1		a:01->prod=ls/prod+Mcand	00001001		00000111 11111110
+				b:shift right product		00001001		00000011 11111111	
+5	1	0		a:10->prod=ls/prod-Mcand	00001001		11111010 11111111
+				b:shift right product		00001001		11111101 01111111	
+6	1	1		a:11->no operation;shiftRight	00001001		11111110 10111111	
+7	1	1		a:11->no operation;shiftRight	00001001		11111111 01011111	
+8	1	1		a:11->no operation;shiftRight	00001001		11111111 10101111	
+Result=11111111 10101111
+Result in decimal=-81
+-------------------------------------------------------------------------------------------------------------------
+

@@ -20,7 +20,7 @@ class StudentType:public Student{
             stdType = type;
         }
         void setStudentType(){
-            Student::printData();
+            Student::setData();
             cout << endl;
             cout << "Student Type:  " << stdType << endl;
         }
@@ -29,7 +29,6 @@ class StudentType:public Student{
         }
         void printData(){
             Student::printData();
-            
         }
 };
 
