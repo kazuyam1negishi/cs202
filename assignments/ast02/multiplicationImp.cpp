@@ -57,11 +57,38 @@ void Multiplication::performBoothAlgorithm(std::ostream &output) const{
     int multiplier[10];
     int multiplicand[10];
     int tempArray[10];
+    int boothBit = 0;
     decimalToBinary(this->multiplier, multiplier, this->bits);
     decimalToBinary(this->multiplicand, multiplicand, this->bits);
     for(int i = 0; i < bits; i++){
-        
-
+        if(multiplier[bits - 1] == 0 &&
+            boothBit == 0){
+                arithShiftRight(accumulator, multiplier, boothBit, 10, output);
+                continue;
+            }
+        if(multiplier[bits - 1] == 0 &&
+            boothBit == 1){
+                for(int i = 0; i < bits; i++){
+                    tempArray[i] = multiplicand[i];
+                }
+                add(accumulator, tempArray, bits);
+                arithShiftRight(accumulator, multiplier, boothBit, 10, output);
+                continue;
+            }
+        if(multiplier[bits - 1] == 1 &&
+            boothBit == 0){
+                for(int i = 0; i < bits; i++){
+                    tempArray[i] = multiplicand[i];
+                }
+                add(accumulator, tempArray, bits);
+                arithShiftRight(accumulator, multiplier, boothBit, 10, output);
+                continue;
+            }
+        if(multiplier[bits - 1] == 1 &&
+            boothBit == 1){
+                arithShiftRight(accumulator, multiplier, boothBit, 10, output);
+                continue;
+            }
     }
 };
 
@@ -83,7 +110,7 @@ void Multiplication::decimalToBinary(int num, int binary[], int length) const{
 
 /*This function reverses the given array */
 void Multiplication::reverseArray(int arr[], int length) const{
-    int tempArr[length];
+    int tempArr[10];
     int count = length - 1;
     for(int i = 0; i < length; i++){
         tempArr[i] = arr[count];
@@ -96,7 +123,7 @@ void Multiplication::reverseArray(int arr[], int length) const{
 
 /* This function prints the given number in binary*/
 void Multiplication::printBinary(int num, int bits, std::ostream &output) const{
-    int arr[bits];
+    int arr[10];
     decimalToBinary(num, arr, bits);
     for(int i = 0; i < bits; i++){
         output << arr[i];
@@ -111,16 +138,36 @@ void Multiplication::add(int accumulator[], int mcnadBinary[], int mplierLength)
     for(int i = mplierLength - 1; i >= 0; i--){
         if(accumulator[i] + mcnadBinary[i] == 0){
             accumulator[i] = 0;
-            break;
+            carry = false;
+            continue;
+        }
+        if(accumulator[i] + mcnadBinary[i] == 0 
+            && carry == true){
+            accumulator[i] = 1;
+            carry = false;
+            continue;
         }
         if(accumulator[i] + mcnadBinary[i] == 1){
             accumulator[i] = 1;
-            break;
+            carry = false;
+            continue;
+        }
+        if(accumulator[i] + mcnadBinary[i] == 1
+            && carry == true){
+            accumulator[i] = 0;
+            carry = true;
+            continue;
         }
         if(accumulator[i] + mcnadBinary[i] == 2){
             accumulator[i] = 0;
             carry = true;
-            break;
+            continue;
+        }
+        if(accumulator[i] + mcnadBinary[i] == 2
+            && carry == true){
+            accumulator[i] = 1;
+            carry = true;
+            continue;
         }
     }
 };
@@ -130,13 +177,11 @@ and stores/write back it in binary[] */
 void Multiplication::complement(int binary[], int n) const{
     for(int i = 0; i < n; i++){
         if(binary[i] == 0){
-            binary[i] == 1;
-            cout << binary[i];
+            binary[i] = 1;
             break;
         }
         if(binary[i] == 1){
-            binary[i] == 0;
-            cout << binary[i];
+            binary[i] = 0;
             break;
         }
     }
@@ -149,6 +194,7 @@ void Multiplication::arithShiftRight(int accumulator[], int mplierBinary[],
     int &mplierLSB, int mplierLength, std::ostream &output) const{
         // Stores/sets LSBs
         int accuLSB = accumulator[mplierLength - 1];
+        // This sets the new booth's bit.
         mplierLSB = mplierBinary[mplierLength - 1];
         // Loops to shift all values to right
         for(int i = mplierLength - 1; i > 0; i--){
@@ -157,6 +203,12 @@ void Multiplication::arithShiftRight(int accumulator[], int mplierBinary[],
         }
         // Sets mplier MSB equal to accu LSB.
         mplierBinary[0] = accuLSB;
+        for(int i = 0; i < bits; i++){
+            output << accumulator[i];
+        }
+        for(int i = 0; i < bits; i++){
+            output << mplierBinary[i];
+        }
     };
 
 /*This function is to display the parameters accumulator[], 
@@ -177,7 +229,20 @@ void Multiplication::display(int accumulator[], int mplierBinary[], int mplierLe
 /*Use booth's algorithm to perform signed binary multiplication and 
 write the results in terminal/console window*/ 
 void Multiplication::performBoothAlgorithmUserInput(){
-    
+    cout << "Number of multiplicand bits=";
+    cin >> bits;
+    cout << "Enter the multiplicand in decimal=";
+    cin >> multiplicand;
+    cout << "Multiplicand in binary: ";
+    cout << "Number of multiplier bits=";
+    cin >> bits;
+    cout << "Enter the multiplier in decimal=";
+    cin >> multiplier;
+    cout << "Multiplier in binary: ";
+
+    performBoothAlgorithm(cout);
+    cout << "Result in binary=";
+    cout << "Result in decimal=";
 };
 
 /*This function gets the accumulator[], mplierBinary[] as input and 
@@ -185,5 +250,29 @@ converts it to decimal. It writes the result to an output file or terminal
 depends upon the ofstream object */
 void Multiplication::binaryToDecimal(int accumulator[], int mplierBinary[], 
     int mplierLength, std::ostream &output) const{
-
+        int mplierPower = mplierLength - 1;
+        int finalDec;
+        if(accumulator[0] == 0){
+            for(int i = mplierLength - 1; i < 0; i--){
+                if(accumulator[i] == 1){
+                    finalDec += pow(2, mplierPower + bits);
+                }
+                if(mplierBinary[i] == 1){
+                    finalDec += pow(2, mplierPower);
+                }
+                mplierPower--;
+            }   
+        }
+        if(accumulator[0] == 1){
+            for(int i = mplierLength - 1; i < 0; i--){
+                if(accumulator[i] == 0){
+                    finalDec += pow(2, mplierPower + bits);
+                }
+                if(mplierBinary[i] == 1){
+                    finalDec += pow(2, mplierPower);
+                }
+                mplierPower--;
+            }   
+        }
+        output << finalDec << endl;
     };

@@ -2,7 +2,7 @@
 #include<iomanip>
 #include "stockInvestor.h"
 #include "investorType.h"
-#include "stocksPortifolio.h"
+#include "stocksPortfolio.h"
 #include "fileIO.h"
 using namespace std;
 
@@ -36,7 +36,7 @@ int main()
 
    // cout << "ID from investorType: " << inObj1.getID() << endl;
 
-    stocksPortifolio fredSP(37.89, 30.00, 25.66, fred);
+    stocksPortfolio fredSP(37.89, 30.00, 25.66, fred);
     fredSP.calculateStockValue(fred, cout);
     fredSP.writePriceChangesToFile(outFile);
 
@@ -45,7 +45,7 @@ int main()
     dennis.print(cout);
     dennis.writeDataToFile(outFile, dennis);
 
-    stocksPortifolio dennisSP(153.89, 150.12, 162.33, dennis);
+    stocksPortfolio dennisSP(153.89, 150.12, 162.33, dennis);
     dennisSP.calculateStockValue(dennis, cout);
     dennisSP.writePriceChangesToFile(outFile);
 
@@ -54,7 +54,7 @@ int main()
     james.print(cout);
     james.writeDataToFile(outFile, james);
 
-    stocksPortifolio jamesSP(153.89, 172.98, 173.64, james);
+    stocksPortfolio jamesSP(153.89, 172.98, 173.64, james);
     jamesSP.calculateStockValue(james, cout);
     jamesSP.writePriceChangesToFile(outFile);
 
@@ -62,7 +62,7 @@ int main()
     ryan.print(cout);
     ryan.writeDataToFile(outFile, ryan);
 
-    stocksPortifolio ryanSP(53.82, 50.12, 52.76, ryan);
+    stocksPortfolio ryanSP(53.82, 50.12, 52.76, ryan);
     ryanSP.calculateStockValue(ryan, cout);
     ryanSP.writePriceChangesToFile(outFile);
 
@@ -70,7 +70,7 @@ int main()
     maria.print(cout);
     maria.writeDataToFile(outFile, maria);
 
-    stocksPortifolio mariSP(23.32, 20.55, 31.02, maria);
+    stocksPortfolio mariSP(23.32, 20.55, 31.02, maria);
     mariSP.calculateStockValue(maria, cout);
     mariSP.writePriceChangesToFile(outFile);
 
@@ -79,7 +79,7 @@ int main()
     oscar.print(cout);
     oscar.writeDataToFile(outFile, oscar);
 
-    stocksPortifolio oscarSP(23.32, 20.55, 31.02, oscar);
+    stocksPortfolio oscarSP(23.32, 20.55, 31.02, oscar);
     oscarSP.calculateStockValue(oscar, cout);
     oscarSP.writePriceChangesToFile(outFile);
 
@@ -89,7 +89,7 @@ int main()
     robert.print(cout);
     robert.writeDataToFile(outFile, robert);
 
-    stocksPortifolio robertSP(51.11, 57.34, 63.48, oscar);
+    stocksPortfolio robertSP(51.11, 57.34, 63.48, oscar);
     robertSP.calculateStockValue(robert, cout);
     robertSP.writePriceChangesToFile(outFile);
 
@@ -98,7 +98,7 @@ int main()
     selma.print(cout);
     selma.writeDataToFile(outFile, selma);
 
-    stocksPortifolio selmaSP(199.25, 180.67, 203.17, selma);
+    stocksPortfolio selmaSP(199.25, 180.67, 203.17, selma);
     selmaSP.calculateStockValue(selma, cout);
     selmaSP.writePriceChangesToFile(outFile);
 
@@ -108,7 +108,7 @@ int main()
     luke.print(cout);
     luke.writeDataToFile(outFile, luke);
 
-    stocksPortifolio lukeSP(27.5, 27.51, 15.17, luke);
+    stocksPortfolio lukeSP(27.5, 27.51, 15.17, luke);
     lukeSP.calculateStockValue(luke, cout);
     lukeSP.writePriceChangesToFile(outFile);
 

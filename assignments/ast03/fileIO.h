@@ -3,9 +3,9 @@
 
 #include<iostream>
 #include "investorType.h"
-#include "stocksPortifolio.h"
+#include "stocksPortfolio.h"
 
-class fileIO:public investorType, public stocksPortifolio{
+class fileIO:public investorType, public stocksPortfolio{
 
 public:
 	unsigned int readWriteDataFile(ifstream &inFile, ofstream &outData);

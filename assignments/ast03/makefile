@@ -1,10 +1,10 @@
 # Make file.
 
-OBJS	= stocksMain.o stockInvestorImp.o investorTypeImp.o stocksPortifolioImp.o fileIOImp.o 
+OBJS	= stocksMain.o stockInvestorImp.o investorTypeImp.o stocksPortfolioImp.o fileIOImp.o 
 CC		= g++
 CCFLAGS	= -Wall -Wextra -pedantic -std=c++11 -g
 
-DEPS	= stockInvestor.h investorType.h stocksPortifolio.h fileIO.h    
+DEPS	= stockInvestor.h investorType.h stocksPortfolio.h fileIO.h    
 
 all: stocksMain
 
@@ -20,8 +20,8 @@ stockInvestorImp.o: stockInvestorImp.cpp $(DEPS)
 investorTypeImp.o: investorTypeImp.cpp $(DEPS)
 	$(CC) $(CCFLAGS) -c investorTypeImp.cpp
 
-stocksPortifolioImp.o: stocksPortifolioImp.cpp $(DEPS)
-	$(CC) $(CCFLAGS) -c stocksPortifolioImp.cpp
+stocksPortfolioImp.o: stocksPortfolioImp.cpp $(DEPS)
+	$(CC) $(CCFLAGS) -c stocksPortfolioImp.cpp
 
 fileIOImp.o: fileIOImp.cpp $(DEPS)
 	$(CC) $(CCFLAGS) -c fileIOImp.cpp

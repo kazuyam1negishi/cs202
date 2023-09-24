@@ -32,7 +32,7 @@ public:
   double getStockCount() const;
 
   void print(ostream &outFile) const;
-  void writeDataToFile(ofstream &outFile, investorType tempObj);
+  void writeDataToFile(ofstream &outFile, investorType &tempObj);
 private:
   string typeName;
   string stockName;

@@ -8,21 +8,21 @@ FileClass::FileClass(string file_name){
         exit(0);
     }
     outFile.open("output.txt");
-    cout << "Files opened!";
 };
 
 FileClass::~FileClass(){
     inFile.close();
     outFile.close();
-    cout << "Files closed!";
 };
 
 void getData(std::vector<Multiplication> &multiplications, const std::string &filename){
     FileClass input(filename);
     Multiplication tempStore;
     while(input.inFile.good()){
+        // Multiplicand Multiplier      Bits
         // Note: works without header.
         // Get that fixed.
+        // 
         input.inFile >> tempStore.multiplicand
             >> tempStore.multiplier
             >> tempStore.bits;

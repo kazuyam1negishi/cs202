@@ -1,0 +1,255 @@
+*****************************************************************
+Investor Type:
+Type Name: Trader
+Investor ID: T12345
+First Name: Fred
+Last Name: Weasley
+
+Stock Name: AAL
+Stock Count: 15.00
+Stock Price: 35.78
+__________________________________________________
+Stock Value with investor Price: 536.70
+Stock Value with a priceOne change: 568.35
+Stock Value with a priceTwo change: 450.00
+Stock Value with a priceThree change: 384.90
+Final Stock Value: -151.80
+Loss on an investment: 151.80
+Price Changes:    37.89   30.00   25.66
+*****************************************************************
+Invalid ID; No calculations for Dennis; ID 318345
+*****************************************************************
+Investor Type:
+Type Name: Personal
+Investor ID: 318345
+First Name: Dennis
+Last Name: Reynolds
+
+Stock Name: IDXX
+Stock Count: 200.00
+Stock Price: 152.05
+__________________________________________________
+Stock Value with investor Price: 0.00
+Stock Value with a priceOne change: 0.00
+Stock Value with a priceTwo change: 0.00
+Stock Value with a priceThree change: 0.00
+Final Stock Value: 0.00
+Profit on an investment: 0.00
+Price Changes:   153.89  150.12  162.33
+*****************************************************************
+James's stock count is invalid
+*****************************************************************
+Investor Type:
+Type Name: Personal
+Investor ID: P29367
+First Name: James
+Last Name: Johnson
+
+Stock Name: AVGO
+Stock Count: -65.00
+Stock Price: 163.41
+__________________________________________________
+Stock Value with investor Price: 0.00
+Stock Value with a priceOne change: 0.00
+Stock Value with a priceTwo change: 0.00
+Stock Value with a priceThree change: 0.00
+Final Stock Value: 0.00
+Profit on an investment: 0.00
+Price Changes:   153.89  172.98  173.64
+*****************************************************************
+Ryan's stock price is invalid
+*****************************************************************
+Investor Type:
+Type Name: Trader
+Investor ID: T99988
+First Name: Ryan
+Last Name: Myers
+
+Stock Name: DISH
+Stock Count: 120.00
+Stock Price: -53.81
+__________________________________________________
+Stock Value with investor Price: 0.00
+Stock Value with a priceOne change: 0.00
+Stock Value with a priceTwo change: 0.00
+Stock Value with a priceThree change: 0.00
+Final Stock Value: 0.00
+Profit on an investment: 0.00
+Price Changes:    53.82   50.12   52.76
+*****************************************************************
+*****************************************************************
+Investor Type:
+Type Name: Trader
+Investor ID: T78564
+First Name: Maria
+Last Name: Garcia
+
+Stock Name: CSCO
+Stock Count: 252.00
+Stock Price: 30.96
+__________________________________________________
+Stock Value with investor Price: 7801.92
+Stock Value with a priceOne change: 5876.64
+Stock Value with a priceTwo change: 5178.60
+Stock Value with a priceThree change: 7817.04
+Final Stock Value: 7817.04
+Profit on an investment: 15.12
+Price Changes:    23.32   20.55   31.02
+*****************************************************************
+Invalid ID; No calculations for Oscar; ID P7888
+*****************************************************************
+Investor Type:
+Type Name: Personal
+Investor ID: P7888
+First Name: Oscar
+Last Name: Bluth
+
+Stock Name: QCOM
+Stock Count: -83.00
+Stock Price: 61.95
+__________________________________________________
+Stock Value with investor Price: 0.00
+Stock Value with a priceOne change: 0.00
+Stock Value with a priceTwo change: 0.00
+Stock Value with a priceThree change: 0.00
+Final Stock Value: 0.00
+Profit on an investment: 0.00
+Price Changes:    23.32   20.55   31.02
+*****************************************************************
+*****************************************************************
+Investor Type:
+Type Name: Trader
+Investor ID: T55669
+First Name: Robert
+Last Name: Smith
+
+Stock Name: NVDA
+Stock Count: 538.00
+Stock Price: 56.24
+__________________________________________________
+Stock Value with investor Price: 30257.12
+Stock Value with a priceOne change: 27497.18
+Stock Value with a priceTwo change: 30848.92
+Stock Value with a priceThree change: 34152.24
+Final Stock Value: 34152.24
+Profit on an investment: 3895.12
+Price Changes:    51.11   57.34   63.48
+*****************************************************************
+Invalid ID; No calculations for Selma; ID S31860
+*****************************************************************
+Investor Type:
+Type Name: Personal
+Investor ID: S31860
+First Name: Selma
+Last Name: Bouvier
+
+Stock Name: NTES
+Stock Count: 46.00
+Stock Price: 200.00
+__________________________________________________
+Stock Value with investor Price: 0.00
+Stock Value with a priceOne change: 0.00
+Stock Value with a priceTwo change: 0.00
+Stock Value with a priceThree change: 0.00
+Final Stock Value: 0.00
+Profit on an investment: 0.00
+Price Changes:   199.25  180.67  203.17
+*****************************************************************
+*****************************************************************
+Investor Type:
+Type Name: Trader
+Investor ID: T13502
+First Name: Luke
+Last Name: Skywalker
+
+Stock Name: FOX
+Stock Count: 512.00
+Stock Price: 27.50
+__________________________________________________
+Stock Value with investor Price: 14080.00
+Stock Value with a priceOne change: 14080.00
+Stock Value with a priceTwo change: 14085.12
+Stock Value with a priceThree change: 7767.04
+Final Stock Value: -6312.96
+Loss on an investment: 6312.96
+Price Changes:    27.50   27.51   15.17
+*****************************************************************
+*****************************************************************
+Investor Type:
+Type Name: Personal
+Investor ID: P29367
+First Name: James
+Last Name: Johnson
+
+Stock Name: AVGO
+Stock Count: 65.00
+Stock Price: 163.41
+__________________________________________________
+Stock Value with investor Price: 10621.65
+Stock Value with a priceOne change: 10002.85
+Stock Value with a priceTwo change: 11243.70
+Stock Value with a priceThree change: 11286.60
+Final Stock Value: 11286.60
+Profit on an investment: 664.95
+Price Changes:   153.89  172.98  173.64
+*****************************************************************
+*****************************************************************
+Investor Type:
+Type Name: Trader
+Investor ID: T99988
+First Name: Ryan
+Last Name: Myers
+
+Stock Name: DISH
+Stock Count: 120.00
+Stock Price: 53.81
+__________________________________________________
+Stock Value with investor Price: 6457.20
+Stock Value with a priceOne change: 6458.40
+Stock Value with a priceTwo change: 6014.40
+Stock Value with a priceThree change: 6331.20
+Final Stock Value: -126.00
+Loss on an investment: 126.00
+Price Changes:    53.82   50.12   52.76
+*****************************************************************
+*****************************************************************
+Investor Type:
+Type Name: Personal
+Investor ID: P78887
+First Name: Oscar
+Last Name: Bluth
+
+Stock Name: QCOM
+Stock Count: 83.00
+Stock Price: 61.95
+__________________________________________________
+Stock Value with investor Price: 5141.85
+Stock Value with a priceOne change: 1935.56
+Stock Value with a priceTwo change: 1705.65
+Stock Value with a priceThree change: 2574.66
+Final Stock Value: -2567.19
+Loss on an investment: 2567.19
+Price Changes:    23.32   20.55   31.02
+*****************************************************************
+*****************************************************************
+Investor Type:
+Type Name: Personal
+Investor ID: P31860
+First Name: Selma
+Last Name: Bouvier
+
+Stock Name: NTES
+Stock Count: 46.00
+Stock Price: 200.00
+__________________________________________________
+Stock Value with investor Price: 9200.00
+Stock Value with a priceOne change: 9165.50
+Stock Value with a priceTwo change: 8310.82
+Stock Value with a priceThree change: 9345.82
+Final Stock Value: 9345.82
+Profit on an investment: 145.82
+Price Changes:   199.25  180.67  203.17
+*****************************************************************
+
+*****************************************************************
+Total Entries: 13

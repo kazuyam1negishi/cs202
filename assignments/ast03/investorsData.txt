@@ -1,0 +1,14 @@
+ID        FirstName LastName  invType   stockName stockCount  stockPrice  pCh1      pCh2      pCh3      
+T12345    Fred      Weasley   Trader    AAL       15.00       35.78       37.89     30.00     25.66     
+318345    Dennis    Reynolds  Personal  IDXX      200.00      152.05      153.89    150.12    162.33    
+P29367    James     Johnson   Personal  AVGO      -65.00      163.41      153.89    172.98    173.64    
+T99988    Ryan      Myers     Trader    DISH      120.00      -53.81      53.82     50.12     52.76     
+T78564    Maria     Garcia    Trader    CSCO      252.00      30.96       23.32     20.55     31.02     
+P7888     Oscar     Bluth     Personal  QCOM      -83.00      61.95       23.32     20.55     31.02     
+T55669    Robert    Smith     Trader    NVDA      538.00      56.24       51.11     57.34     63.48     
+S31860    Selma     Bouvier   Personal  NTES      46.00       200.00      199.25    180.67    203.17    
+T13502    Luke      Skywalker Trader    FOX       512.00      27.50       27.50     27.51     15.17     
+P29367    James     Johnson   Personal  AVGO      65.00       163.41      153.89    172.98    173.64    
+T99988    Ryan      Myers     Trader    DISH      120.00      53.81       53.82     50.12     52.76     
+P78887    Oscar     Bluth     Personal  QCOM      83.00       61.95       23.32     20.55     31.02     
+P31860    Selma     Bouvier   Personal  NTES      46.00       200.00      199.25    180.67    203.17    
