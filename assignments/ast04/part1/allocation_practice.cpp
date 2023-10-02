@@ -1,6 +1,14 @@
+/*
+    Name: Jimmy Soto Agustin, 5008099390, 1001, Assignment 4
+    Description: Test for learning to use pointers and arrays of ptrs.
+    Input: Array size by user.
+    Output: Empty Item array, half full Item array and standard Item.
+*/
+
 #include <iostream>
 //TODO: For practice, do your own includes up here. 
 //Please include the item header file so you can use the item class
+#include "item.h"
 
 using namespace std;
 
@@ -30,8 +38,10 @@ int main()
 	//TODO: Write the code to allocate an Item for a TV that costs $600.00 and a quantity of 4
 	//Then, write a line to print that TV's info using the printItemInfo() function
 	//Please be sure to look through the Item header file!
-	
-	
+
+	tv = new Item("TV", 4, 600.00);
+	// cout << "Television item created!" << endl;
+	tv->printItemInfo();
 	
 	//---------------------- Array Allocation ----------------------
 	int itemCount;
@@ -41,8 +51,12 @@ int main()
 	//TODO: Write code to practice allocating an array
 	//The above prompt will read the size of the array. Allocate an array of that size
 	//And then print all of the items in that array (they should all be blank, but it's fine)
-
-
+	
+	arr = new Item[itemCount];
+	// cout << "myArray array created!" << endl;
+	for(int i = 0; i < itemCount; i++){
+		arr[i].printItemInfo();
+	}
 	
 	//---------------------- Array of Pointers Allocation ----------------------
 	Item** itemsArr; //This is a 1D array of Item*s! Alternatively ItemRef* itemsArr.
@@ -51,6 +65,13 @@ int main()
 	//Allocate a 1D array of pointers to items. Then, fill half of the array with 
 	//Keyboard items that cost $25.50 and a quantity of 1
 	//Afterwards, print these keyboards
+
+	itemsArr = new Item*[itemCount];
+	for(int i = 0; i < halfSize; i++){
+		itemsArr[i] = new Item("Keyboard", 1, 25.50);
+		// cout << "newStuff at " << i+1 << " created. This program will make " << halfSize << " entries." << endl;
+		itemsArr[i]->printItemInfo();
+	}
 	
 	//While this method can seem tricky at first, it can be more efficient. Since pointers do not allocate the Item
 	//they will point to (unlike normal object declarations) an Item does not always need to be created.
@@ -58,20 +79,22 @@ int main()
 	//the previous array did, which always fills any spaces with blank Items. Here, those spaces are left as
 	//nullptr, but do not point to any actual Item objects.
 	
-	
-	
 	//---------------------- Deallocation ----------------------
 	//This will be provided as an example. Any dynamically allocated memory needs to be deallocated before
 	//the program finishes, or else a memory leak will occur
 	//Basically, any memory that we as programmers allocate will also need to be deallocated by the programmer
 	
 	delete tv; //Deallocating the tv. delete is used to deallocate objects
+	// cout << "tv erased" << endl;
 	delete[] arr; //Deallocating the array of Items. delete[] is used for deallocating arrays
+	// cout << "arr erased" << endl;
 	//Deallocating the array of Item*s
-	for(int i = 0; i < halfSize; i++) //First, deallocate the items in the array
+	for(int i = 0; i < halfSize; i++){ //First, deallocate the items in the array
 		delete itemsArr[i]; //Deallocate each item, which is an object and needs delete
+		// cout << "itemsArr at " << i << " erased" << endl;
+	}
 	delete[] itemsArr; //Delete the array that held the items afterwards
-
+	// cout << "itemsArr erased" << endl;
 	return 0;
 }
 

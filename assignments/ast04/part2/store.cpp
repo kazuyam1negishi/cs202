@@ -1,5 +1,13 @@
+/*
+    Name: Jimmy Soto Agustin, 5008099390, 1001, Assignment 4
+    Description: Reads in data from files to populate storefront.
+    Input: Text file name.
+    Output: Array of Items in an interactive store front.
+*/
+
 #include "store.h"
 #include "shopping_cart.h"
+#include <sstream>
 
 /* */
 void Store::readItemsFromFile(istream& itemsFile)
@@ -20,12 +28,38 @@ void Store::readItemsFromFile(istream& itemsFile)
 	float tempPrice;
 
 	//TODO: Finish the function
+	// Takes the first line and sets the catalog size
+	string tempLine;
+	int itemCount = 0;
+
+	getline(itemsFile, tempLine);
+	catalogSize = stoi(tempLine);
+
+	// Creates array to hold the stuff in the item catalog.
+	itemCatalog = new Item * [catalogSize];
+
+	// Sets up the remaining values.
+	while(getline(itemsFile, tempLine)){
+		string nameStr = "";
+		tempName = "";
+		stringstream ss(tempLine);
+		ss >> tempQuantity >> tempPrice;
+		while(ss >> nameStr){
+			tempName += nameStr + " ";
+		}
+		itemCatalog[itemCount] = new Item (tempName, tempQuantity, tempPrice);
+		itemCount++;
+	}
 }
 
 /* */
 Store::~Store()
 {
 	//TODO: Finish the function
+	for(int i = 0; i < catalogSize; i++){
+		delete itemCatalog[i];
+	}
+	delete [] itemCatalog;
 }
 
 //------------------------------------------- SKELETON CODE -------------------------------------------
