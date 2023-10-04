@@ -21,8 +21,8 @@ class StudentType:public Student{
         }
         void setStudentType(){
             Student::printData();
-            cout << endl;
-            cout << "Student Type:  " << stdType << endl;
+            std::cout << std::endl;
+            std::cout << "Student Type:  " << stdType << std::endl;
         }
         std::string getStudentType(){
             return(stdType);
