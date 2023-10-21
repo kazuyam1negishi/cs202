@@ -11,9 +11,12 @@ class Rectangle{
 		Rectangle(Rectangle const &); // Copy constructor
         void setRectangle(int l, int w);
         void print() const;
-		void changeToNegative(); //unary op
-		Rectangle operator-(Rectangle); // binary op
-		Rectangle &operator=(Rectangle const &);
+		void changeToNegative(); //unary operator
+		Rectangle operator-(Rectangle); // binary operator
+		Rectangle &operator=(Rectangle const &); // assignment operator
+		bool operator<(Rectangle const &); // relational operator
+		friend bool operator>(Rectangle const &, Rectangle const &);
+		friend ostream& operator<<(ostream&, Rectangle const &);
         ~Rectangle();
 };
 
@@ -54,27 +57,40 @@ Rectangle &Rectangle::operator=(Rectangle const &rObj){
 	width = rObj.width;
 	return *this;
 };
-
-
+bool Rectangle::operator<(Rectangle const &rObj){
+	return(length < rObj.length && *width < *(rObj.width));
+};
+bool operator>(Rectangle const &rObjOne, Rectangle const &rObjTwo){
+	return(rObjOne.length>rObjTwo.length && *rObjOne.width>*rObjTwo.width);
+};
+ostream & operator<<(ostream &ostrObj, Rectangle const &rObj){
+	ostrObj << "Length: " << rObj.length << "\n"
+		<< "Width: " << *rObj.width << "\n";
+	return(ostrObj);
+};
 
 int main(){
-	Rectangle rObj;
-	rObj.setRectangle(10,15);
-	rObj.changeToNegative();
-	rObj.print();
+	Rectangle rObj1;
+	rObj1.setRectangle(10,15);
+	rObj1.changeToNegative();
+	rObj1.print();
 
 	Rectangle rObj2;
 	rObj2.setRectangle(20, 25);
 	rObj2.print();
 	
-	// This is a copy constructor.
-	// Rectangle rObj3=rObj;
-	// This is also one.
-	Rectangle rObj3(rObj);
+	Rectangle rObj3(rObj1);
 	rObj3.print();
-
-	// Rectangle rObj4;
-	// This is an assignment operator.
-	// rObj4=rObj2;
-	// rObj4.print();
+	
+	if(rObj1<rObj2){
+		cout << "rObj1 is smaller!\n";
+	} else{
+		cout << "rObj1 is bigger!\n";
+	}
+	if(rObj1>rObj2){
+		cout << "rObj2 is smaller!\n";
+	} else{
+		cout << "rObj2 is bigger!\n";
+	}
+	cout << rObj1;
 }
