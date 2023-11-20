@@ -1,3 +1,10 @@
+/*
+    Name: Jimmy Soto Agustin, 5008099390, 1001, Assignment 7
+    Description: Recursion header file
+    Input: Dependent on function (int, or int array and ints)
+    Output: Dependent on function (int, bool or void)
+*/
+
 #ifndef RECURSION_H
 #define RECURSION_H
 
@@ -16,9 +23,8 @@ void countBackwards(int num){
 	if(num == 0){
 		cout << num << endl;
 		return;
-	} else {
-		cout << num << ", ";
 	}
+	cout << num << ", ";
 	countBackwards(num - 1);
 }
 
@@ -60,7 +66,7 @@ bool isValueInArray(int arr[], int start, int length, const int& value)
 		return(true);
 	}
 	if(arr[middle] > value){
-		return(isValueInArray(arr, start, leftLength - 1, value));
+		return(isValueInArray(arr, start, leftLength, value));
 	}
 	if(arr[middle] < value){
 		return(isValueInArray(arr, middle + 1, rightLength - 1, value));

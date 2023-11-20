@@ -1,3 +1,10 @@
+/*
+    Name: Jimmy Soto Agustin, 5008099390, 1001, Assignment 7
+    Description: Sweepminer class function definitions
+    Input: None
+    Output: Game board printed with distances from bombs (in red)
+*/
+
 #include "sweepminer.h"
 #include <iomanip>
 #include <vector> 
@@ -15,9 +22,15 @@ void Sweepminer::allocateBoard()
 	//After allocating, fill the board with maxDist to mark as uninitialized
 
 	int maxDist = width + height + 1; //Maximum possible distance a space could be from bomb
+
 	board = new int * [height];
 	for(int i = 0; i < height; i++){
 		board[i] = new int [width];
+	}
+	for(int i = 0; i < height; i++){
+		for(int j = 0; j < width; j++){
+			board[i][j] = maxDist;
+		}
 	}
 }
 
@@ -52,10 +65,29 @@ void Sweepminer::generateDistances(Position pos, int distance)
 
 	//Please see the pdf and video for a more detailed explanation
 
-
-
-
-	// generateDistances(pos, distance);
+	// Checks if out of bounds.
+	// If it is, then returns and stops.
+	if(pos.x < 0 || pos.y < 0){
+		// cout << "Out of bounds!\n";
+		return;
+	}
+	if(pos.x >= width || pos.y >= height){
+		// cout << "Out of bounds!\n";
+		return;
+	}
+	// Checks if current distance is greater.
+	// If so, do not overwrite.
+	if(board[pos.y][pos.x] < distance){
+		// cout << "Already closer to another bomb!\n";
+		return;
+	}
+	// Sets value if all checks pass.
+	board[pos.y][pos.x] = distance;
+	// Recursive calls
+	generateDistances(pos.addPosition(1,0), distance+1);
+	generateDistances(pos.addPosition(-1,0), distance+1);
+	generateDistances(pos.addPosition(0,1), distance+1);
+	generateDistances(pos.addPosition(0,-1), distance+1);
 }
 
 //------------------------------------ FUNCTIONS FOR SKELETON ------------------------------------
@@ -87,13 +119,14 @@ void Sweepminer::populateBoard(const int& bomb_count)
 
 		//Then, add the bomb and generate its distances
 		generateDistances(*temp, 0); //Position is temp, distance to bomb is 0
-		delete temp;
 	
 		//Debug print info
 		#ifdef DEBUG
-		cout << "Board after putting bomb " << i << " at (" << temp.x << ", " << temp.y << ")" << endl;
+		cout << "Board after putting bomb " << i << " at (" << temp->x << ", " << temp->y << ")" << endl;
 		printBoard();
 		#endif
+
+		delete temp;
 	}
 }
 

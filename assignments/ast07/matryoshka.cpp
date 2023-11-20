@@ -1,3 +1,10 @@
+/*
+    Name: Jimmy Soto Agustin, 5008099390, 1001, Assignment 7
+    Description: Matryoshka doll function definitions
+    Input: None
+    Output: All dolls being opened (along with which number doll)
+*/
+
 #include "matryoshka.h"
 
 /* */

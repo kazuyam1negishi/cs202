@@ -26,7 +26,7 @@ class Sweepminer
 	void allocateBoard();
 	void deallocateBoard();
 	int getDistanceAtPosition(Position pos) const { return board[pos.y][pos.x]; }
-	int setDistanceAtPosition(Position pos, int dist) { board[pos.y][pos.x] = dist; }
+	void setDistanceAtPosition(Position pos, int dist) { board[pos.y][pos.x] = dist; }
 public:
 	void populateBoard(const int& bomb_count);
 	void generateDistances(Position pos, int distance);
