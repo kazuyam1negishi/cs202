@@ -1,3 +1,10 @@
+/*
+    Name: Jimmy Soto Agustin, 5008099390, 1001, Assignment 8
+    Description: Handling branches (or arrays) in linked lists
+    Input: none
+    Output: branches and prunes (node array alloc and frees)
+*/
+
 #include<iostream>
 using namespace std;
 
@@ -27,19 +34,32 @@ class Timeline{
   Moving the private here to not scroll too much
   private:
     int size;
-    Node * head;
+    node * head;
   */
   public:
-    //Your Code Here
-    //Constructor with start year and size. default param are 0 for both.
+    // Finished!!!
     Timeline(int start, int size){
+      // Make first node
+      node * temp = new node;
       this->size = size;
-      head->year = start;
-      for(int i = 0; i < size-1; i++){
-        head->next = 
+      temp->year = start;
+      temp->next = nullptr;
+      head = temp;
+      // Make the rest, but not at head
+      // like I was doing at the beginning.
+      for(int i = 1; i < size; i++){
+        node * tmp = new node;
+        tmp->year = start + i;
+        tmp->next = nullptr;
+        node * curr = head;
+        while(curr->next != nullptr){
+          curr = curr->next;
+        }
+        curr->next = tmp;
       }
     }
 
+    // Finished!!!
     int createNexusEvent(int amount = 1){
       if(!head) return 0; //Can't create nexus event if timeline is empty!
       for(int i=0; i< amount; i++){
@@ -51,17 +71,74 @@ class Timeline{
         //Your code Here for createNexusEvent
         //branch the timeline here.
         //dont forget to delete the year after nexus since we replaced with non pointer type in next[0]
-        
+
+        // start here
+        // pointer to iterate through linked list
+        node * ptr = head;
+        // if ptr->next is nullptr,
+        // that means the list is now empty.
+        while(ptr->next != nullptr){
+          // ptr now points to next node.
+          ptr = ptr->next;
+          if(ptr->year == year){
+            // timeline split is done here, with one node
+            // for the timeline and another for the branches.
+            node * nexSplit = new node[2];
+            // This is for the sacred timeline...
+            nexSplit[0].year = (ptr->next)->year;
+            nexSplit[0].next = (ptr->next)->next;
+            nexSplit[0].branches = (ptr->next)->branches;
+            // ...and the branch is to come later.
+            // First, another new node for the branch.
+            node * branch = &nexSplit[1];
+            branch->year = ptr->year;
+            branch->next = nullptr;
+            for(int i = 1; i <= branchSize; i++){
+              node * tmp = new node;
+              tmp->year = ptr->year + i;
+              tmp->next = nullptr;
+              node * curr = branch;
+              while(curr->next != nullptr){
+                curr = curr->next;
+              }
+              curr->next = tmp;
+            }
+            // Pointing...
+            ptr->next = nexSplit;
+            ptr->branches = 1;
+          }
+        }
         cout << "Created Nexus at " << year << ", Size: " << branchSize+1 << endl;
       }
       return amount;
     }
+    
+    // Finished!!!
     void print(){
       cout << "The Sacred Timeline" << endl;
+      cout << "s->";
       //Your Code Here for print. It should match the output in wtf function exactly.
+      node * ptr = head;
+      while(ptr != nullptr){
+          cout << ptr->year << "->";
+          if(ptr->branches > 0){
+            cout << "(";
+            node * nexPtr = &ptr->next[1];
+            while(nexPtr->next != nullptr){
+              cout << "*" << nexPtr->year << ".1";
+              nexPtr = nexPtr->next;
+              cout << "->";
+            }
+            cout << "*" << nexPtr->year << ".1";
+            cout << ")";
+            cout << "~>";
+          }
+          ptr = ptr->next;
+      }
       cout << "x\n" << endl;
     }
     //Visual Print Mode
+    // Finished!!!
     void vprint(){
       //Your Code Here for visual print.
       //Best thing to do is to create a 2D array of chars. generate the proper drawing,
@@ -71,19 +148,130 @@ class Timeline{
       //in the sacred timeline each - represents 1 year. If 2 branches happen to overap it's ok don't worry about it.
       //same thing if the map is too wide (bigger than 70) don't worry about it just stop printing and cut it off so
       //it does not segfault
+
+      // Array declaration
+      char graphic[11][70];
+      // Array initialization
+      // Printing top and bottom borders,
+      // and whitespace where branches will be.
+      for(int i = 0; i < 11; i++){
+        for(int j = 0; j < 70; j++){
+          // Print borders
+          if(i == 0 || i == 10){
+            graphic[i][j] = '#';
+          // Initialize the rest of the arr
+          } else if(i == 5 && j < size){
+            graphic[i][j] = '-';
+          } else {
+            graphic[i][j] = ' ';
+          }
+        }
+      }
+      // resume here: print branches
+      int yearCount = 0;
+      node * timePtr = head;
+      bool top = true;
+      while(timePtr->next != nullptr){
+        timePtr = timePtr->next;
+        yearCount++;
+        if(yearCount >= 70 || timePtr == nullptr){
+          continue;
+        }
+        if(timePtr->branches > 0 && top == true){
+          graphic[4][yearCount] = '/';
+          graphic[3][yearCount + 1] = '/';
+          node * branchPtr = &timePtr->next[1];
+          int branchCount = 0;
+          while(branchPtr != nullptr){
+            branchPtr = branchPtr->next;
+            branchCount++;
+          }
+          for(int i = 0; i < branchCount; i++){
+            if((yearCount + 2 + i) < 70){
+              graphic[2][yearCount + 2 + i] = '~';
+            }
+          }
+          top = false;
+          continue;
+        }
+        if(timePtr->branches > 0 && top == false){
+          graphic[6][yearCount] = '\\';
+          graphic[7][yearCount + 1] = '\\';
+          node * branchPtr = &timePtr->next[1];
+          int branchCount = 0;
+          while(branchPtr != nullptr){
+            branchPtr = branchPtr->next;
+            branchCount++;
+          }
+          for(int i = 0; i < branchCount; i++){
+            if((yearCount + 2 + i) < 70){
+              graphic[8][yearCount + 2 + i] = '~';
+            }
+          }
+          top = true;
+          continue;
+        }
+      }
+      for(int i = 0; i < 11; i++){
+        for(int j = 0; j < 70; j++){
+          cout << graphic[i][j];
+        }
+        cout << endl;
+      }
     }
+
+    // Nah...
     int prune(){ //prunes a branch and returns location it pruned. For all time. always.
       int yearWithBranch = -1;
       int branchSize = 1;
       //Your Code Here
+      node * ptr = head;
+      while(ptr->next != nullptr){
+        ptr = ptr->next;
+        if(ptr->branches != 0){
+          // branch found
+          yearWithBranch = ptr->year;
+          branchSize = ptr->branches;
+          // ptrs to traverse and remove nodes
+          node * branch = ptr->next[1].next;
+          node * delPtr = ptr->next[1].next;
+          // delete nodes
+          while(branch != nullptr){
+            delPtr = branch;
+            branch = branch->next;
+            delete delPtr;
+            branchSize++;
+          }
+          // new node to hold next node and connect timeline
+          node * sacredTime = new node(ptr->next[0].year);
+          // deep copy
+          sacredTime->branches = ptr->next[0].branches;
+          sacredTime->next = ptr->next[0].next;
+          // remove and dealloc branch
+          ptr->branches = 0;
+          delete [] ptr->next;
+          // timeline connected!
+          ptr->next = sacredTime;
+          break;
+        }
+      }
+
       if(yearWithBranch != -1)
         cout << "Pruned Brach at: " << yearWithBranch << " of size " << branchSize << endl;
       return yearWithBranch;
     }
 
+    // Finished!!!
     ~Timeline(){
       //Your Code Here for de-allocating. if you find a branch that was not pruned just cout that it was not pruned.
       //cout << "Branch was not pruned!" << endl;
+      node * ptr = head;
+      while(ptr->next != nullptr){
+        ptr = ptr->next;
+        delete head;
+        head = ptr;
+      }
+      delete head;
     }
   //Don't modify any code beneath this line or the TVA will prune you!!!
   private:
@@ -132,7 +320,8 @@ int main(int argc, char *argv[]) { // ./a.out 40 4 1970 50 (40 is seed, 4 is num
   Timeline sacredTimeline(startYear, timelineLength);
   sacredTimeline.print();
   sacredTimeline.createNexusEvent(nexusEventsToCreate);
-  //sacredTimeline.print();
+  // remember to uncomment before submitting!
+  // sacredTimeline.print();
   sacredTimeline.wtf();
   sacredTimeline.vprint();
   cout << "Nexus Event Detected! Sending Minute Men to Prune the Branches!\n" << endl;
